@@ -42,6 +42,6 @@ testem.log
 Thumbs.db
 
 #envrionment files
-#src/environments/**
+src/environments/**
 
 .vercel
