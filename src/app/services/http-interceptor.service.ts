@@ -1,4 +1,4 @@
-import { HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { LoaderService } from './loader.service';
@@ -26,8 +26,8 @@ export class LoaderInterceptorService {
   }
   intercept(request: HttpRequest<any>, next: HttpHandler) {
 
-    if (request.method!="GET" && !this.authService.isLoggedIn()) {
-      this.utilService.logOutUnAuthorizedUser();
+    if ( !this.authService.isLoggedIn()) {
+      this.utilService.logOut();
     } else {
       if (request.method == 'POST' || request.method == 'PATCH') {
         request = request.clone({
