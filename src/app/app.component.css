@@ -1,0 +1,44 @@
+/* common styles for trainer and catalogue component */
+.d-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  max-width: 400px;
+  margin: 10px;
+  text-align: center;
+  padding: 10px;
+  min-width: 210px;
+}
+
+.button-div {
+  margin: 20px;
+}
+
+.button-div>button {
+  margin-right: 10px;
+}
+
+.card-image {
+  width: auto;
+}
+
+.pokemon-name {
+  font-size: 20px;
+}
+
+
+button {
+  display: inline-block;
+  line-height: 50px;
+  text-align: center !important;
+}
+
+
+.button,.pokeball-icon{
+  margin-bottom: 10px;
+
+}

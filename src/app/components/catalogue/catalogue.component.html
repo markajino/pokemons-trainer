@@ -1,0 +1,39 @@
+<div class="card-container d-flex" >
+  <mat-card class="card animate__animated aanimate__zoomIn" *ngFor="let pokemon of pokemons">
+    <img mat-card-image [src]="pokemon.url | generateImageUrl" alt="Photo of a pokemons" class="card-image">
+    <mat-card-content>
+      <p class="pokemon-name">{{pokemon.name}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+
+     <ng-container
+       *ngIf=" pokemon|checkIfPokemonExistsInTrainerCollection then showPokeball else showAddButton "></ng-container>
+
+        <ng-template #showPokeball>
+        <mat-icon class="pokeball-icon"
+          color="warn" aria-hidden="false" title="Already Added" aria-label="Example home icon">catching_pokemon
+        </mat-icon>
+        </ng-template>
+     <ng-template #showAddButton>
+
+       <button class="button" *ngIf="!pokemon.addedToTrainerCollection else showPokeball" mat-raised-button color="primary"
+         (click)="addPokemonsToTrainer(pokemon)">Add To Collection <mat-icon
+           aria-hidden="false" aria-label="Example home icon">add_box</mat-icon></button>
+
+
+     </ng-template>
+
+    </mat-card-actions>
+  </mat-card>
+
+</div>
+
+<div class="d-flex button-div">
+ <button type="button" [disabled]="!pokeApiResponse.previous" mat-raised-button color="primary"
+   (click)="fetchIntialPokemonList()">First</button>
+      <button [disabled]="!pokeApiResponse.next" type="button" mat-raised-button color="primary"
+        (click)="fetchNextPokemonList()">Next</button>
+
+      <button [disabled]="!pokeApiResponse.previous" type="button" mat-raised-button color="primary"
+        (click)="fetchPreviousPokemonList()">Previous</button>
+</div>
