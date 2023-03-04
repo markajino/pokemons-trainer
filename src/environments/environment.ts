@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  
+  'X_API_KEY': "",
 };
 
 /*
