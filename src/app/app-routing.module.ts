@@ -7,7 +7,7 @@ import { AuthenticationGuard } from './services/authentication.guard';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'login',
     component: LoginComponent,
   },
   {
@@ -16,7 +16,7 @@ export const routes: Routes = [
   }, {
     path: 'catalogue', component: CatalogueComponent,canActivate:[AuthenticationGuard]
   },
-   { path: '**', redirectTo:'/' }
+   { path: '**', redirectTo:'/login' }
 ];
 
 @NgModule({

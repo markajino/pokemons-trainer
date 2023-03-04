@@ -1,10 +1,11 @@
-import { HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { LoaderService } from './loader.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { UtilService } from './util.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { UtilService } from './util.service';
 export class LoaderInterceptorService {
   private requests: HttpRequest<any>[] = [];
 
-  constructor(private loaderService: LoaderService,private authService: AuthService,private utilService:UtilService) {}
+  constructor(private loaderService: LoaderService,private authService: AuthService,private utilService:UtilService,private router: Router) {}
 
   removeRequest(request: HttpRequest<any>) {
 
@@ -25,9 +26,9 @@ export class LoaderInterceptorService {
     }
   }
   intercept(request: HttpRequest<any>, next: HttpHandler) {
-
-    if ( !this.authService.isLoggedIn()) {
-      this.utilService.logOut();
+console.log('intercepting request', request);
+    if (!this.authService.isLoggedIn() && this.router.url!='/login') {
+      this.utilService.logOutUnAuthorizedUser();
     } else {
       if (request.method == 'POST' || request.method == 'PATCH') {
         request = request.clone({
