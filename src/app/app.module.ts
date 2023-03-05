@@ -9,12 +9,13 @@ import { TrainerComponent } from './components/trainer/trainer.component';
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { FormsModule } from '@angular/forms';
 import { GenerateImagesUrlPipe } from './pipes/generate-images-url.pipe';
-import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatProgressSpinnerModule, MatSpinner } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatListModule, MatProgressSpinnerModule, MatSpinner } from '@angular/material';
 import { LoaderInterceptorService } from './services/http-interceptor.service';
 import { NgxUiLoaderConfig, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { CheckIfPokemonExistsInTrainerCollectionPipe } from './pipes/check-if-pokemon-exists-in-trainer-collection.pipe';
 import { HeaderComponent } from './components/header/header.component';
+import { PokemonDetailsComponent } from './components/pokemon-details/pokemon-details.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'red',
@@ -56,6 +57,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     GenerateImagesUrlPipe,
     CheckIfPokemonExistsInTrainerCollectionPipe,
     HeaderComponent,
+    PokemonDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatProgressSpinnerModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     ToastrModule.forRoot({

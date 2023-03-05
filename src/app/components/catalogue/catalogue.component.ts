@@ -8,16 +8,17 @@ import { SessionStorageService } from 'src/app/services/session-storage.service'
 @Component({
   selector: 'app-catalogue',
   templateUrl: './catalogue.component.html',
-  styleUrls: ['./catalogue.component.css','.././../app.component.css'],
+  styleUrls: ['./catalogue.component.css', '../../app.component.css'],
 })
 export class CatalogueComponent implements OnInit {
   pokemons!: Pokemon[];
   pokeApiResponse!: PokeApiResponse;
   user!: PokemonTrainer;
+  showPokemonDetails:boolean = false;
   constructor(
     private http: HttpService,
     private sessionService: SessionStorageService,
-    private alertService: ToastrService,
+    private alertService: ToastrService
   ) {
     this.user = this.sessionService.getUser();
   }
@@ -48,22 +49,18 @@ export class CatalogueComponent implements OnInit {
   }
 
   fetchPreviousPokemonList() {
-    this.http
-      .getPaginatedPokemons(this.pokeApiResponse.previous)
-      .subscribe({
-        next:(data)=>{
+    this.http.getPaginatedPokemons(this.pokeApiResponse.previous).subscribe({
+      next: (data) => {
         console.log(data);
         this.pokeApiResponse = data;
         this.pokemons = data.results;
         this.sessionService.savePokemon(this.pokeApiResponse);
-
       },
-     error: (error) => {
+      error: (error) => {
         this.alertService.error(error.message);
-      }
+      },
     });
-    };
-
+  }
 
   fetchIntialPokemonList() {
     this.http.getPokemons().subscribe({
@@ -76,27 +73,38 @@ export class CatalogueComponent implements OnInit {
 
       error: (error) => {
         this.alertService.error(error.message);
-      }
+      },
     });
   }
 
   addPokemonsToTrainer(pokemon: Pokemon) {
+    this.http
+      .updatePokemonToTrainerCollection(this.user.id!, [
+        ...this.user.pokemons,
+        pokemon,
+      ])
+      .subscribe({
+        next: (data) => {
+          this.user = data;
+          this.sessionService.saveUser(this.user);
+          this.alertService.success(
+            pokemon?.name + '  addded to trainer collection',
+            'Success'
+          );
 
-    this.http.updatePokemonToTrainerCollection(this.user.id!,[...this.user.pokemons,pokemon]).subscribe({
-      next: (data) => {
-        this.user = data;
-        this.sessionService.saveUser(this.user);
-        this.alertService.success(
-          pokemon?.name + '  addded to trainer collection',"Success"
-        );
+          let index = this.pokemons.findIndex((p) => p == pokemon);
+          this.pokemons[index].addedToTrainerCollection = true;
 
-        let index = this.pokemons.findIndex((p) => p == pokemon);
-        this.pokemons[index].addedToTrainerCollection = true;
+          console.log(this.pokemons);
+        },
+        error: (error) => {
+          this.alertService.error(error.message, 'error');
+        },
+      });
+  }
 
-        console.log(this.pokemons);
-       },
-      error: (error) => {this.alertService.error(error.message,"error");}
-    });
+  fetchPokemonDetails(pokemon: Pokemon) {
+
   }
 }
 

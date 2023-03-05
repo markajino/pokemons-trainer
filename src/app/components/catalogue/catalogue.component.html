@@ -3,6 +3,7 @@
     <img mat-card-image [src]="pokemon.url | generateImageUrl" alt="Photo of a pokemons" class="card-image">
     <mat-card-content>
       <p class="pokemon-name">{{pokemon.name}}</p>
+      <app-pokemon-details  [pokemon]="pokemon" ></app-pokemon-details>
     </mat-card-content>
     <mat-card-actions>
 
@@ -16,7 +17,7 @@
         </ng-template>
      <ng-template #showAddButton>
 
-       <button class="button" *ngIf="!pokemon.addedToTrainerCollection else showPokeball" mat-raised-button color="primary"
+       <button class="button wide-button" *ngIf="!pokemon.addedToTrainerCollection else showPokeball" mat-raised-button color="primary"
          (click)="addPokemonsToTrainer(pokemon)">Add To Collection <mat-icon
            aria-hidden="false" aria-label="Example home icon">add_box</mat-icon></button>
 
@@ -27,6 +28,8 @@
   </mat-card>
 
 </div>
+
+
 
 <div class="d-flex button-div">
  <button type="button" [disabled]="!pokeApiResponse.previous" mat-raised-button color="primary"
