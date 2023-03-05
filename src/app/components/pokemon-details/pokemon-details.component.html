@@ -1,0 +1,48 @@
+<a mat-raised-button class="button wide-button"
+  (click)="onClick()">{{showPokemonDetails?' Hide info ':'Show more info'}}
+
+  <mat-icon class="material-symbols-outlined">
+    {{showPokemonDetails?'expand_less' : 'expand_more'}}
+  </mat-icon>
+</a>
+
+<div *ngIf="showPokemonDetails" class="pokemon-details animate__animated animate__zoomIn">
+
+  <div class="info-group">
+    <div class="info" id="moves">
+      <h3>Moves</h3>
+      <mat-list *ngFor="let move of moves">
+        <span>
+          {{move}}
+        </span>
+      </mat-list>
+    </div>
+    <div class="info" id="stats">
+      <h3>Stats</h3>
+      <mat-list *ngFor="let stat of stats">
+        <span>
+          {{stat}}
+        </span>
+      </mat-list>
+    </div>
+  </div>
+  <div class="info-group">
+    <div class="info" id="types">
+    <h3>Types</h3>
+    <mat-list *ngFor="let type of types">
+      <span>
+        {{type}}
+      </span>
+    </mat-list>
+</div>
+<div class="info" class="abilities">
+    <h3>Abilities</h3>
+    <mat-list *ngFor="let ability of abilities">
+      <span>
+        {{ability}}
+      </span>
+    </mat-list>
+  </div>
+
+</div>
+</div>

@@ -9,8 +9,8 @@ import { Pokemon } from '../models/pokemon.model';
   providedIn: 'root',
 })
 export class HttpService {
-  baseApiURL = 'https://json-server-assingment-api-production.up.railway.app/trainers';
-
+  trainerBaseApiURL =
+    'https://json-server-assingment-api-production.up.railway.app/trainers';
   constructor(private http: HttpClient) {}
 
   getPokemons(): Observable<PokeApiResponse> {
@@ -25,7 +25,7 @@ export class HttpService {
 
   getTrainerAndPokemonsByName(userName: string) {
     return this.http.get<PokemonTrainer[]>(
-      this.baseApiURL + '?username=' + userName
+      this.trainerBaseApiURL + '?username=' + userName
     );
   }
 
@@ -33,13 +33,16 @@ export class HttpService {
     id: number,
     pokemons: Pokemon[]
   ): Observable<PokemonTrainer> {
-    return this.http.patch<PokemonTrainer>(
-      this.baseApiURL + '/' + id,
-      { pokemons}
-    );
+    return this.http.patch<PokemonTrainer>(this.trainerBaseApiURL + '/' + id, {
+      pokemons,
+    });
   }
 
   saveTrainer(trainer: PokemonTrainer): Observable<PokemonTrainer> {
-    return this.http.post<PokemonTrainer>(this.baseApiURL, trainer);
+    return this.http.post<PokemonTrainer>(this.trainerBaseApiURL, trainer);
+  }
+
+  fetchPokemonDetails(url: string): Observable<Pokemon> {
+    return this.http.get<Pokemon>(url);
   }
 }

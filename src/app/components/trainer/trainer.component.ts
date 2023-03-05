@@ -8,7 +8,7 @@ import { SessionStorageService } from 'src/app/services/session-storage.service'
 @Component({
   selector: 'app-trainer',
   templateUrl: './trainer.component.html',
-  styleUrls: ['./trainer.component.css', '.././../app.component.css'],
+  styleUrls: ['./trainer.component.css', '../../app.component.css'],
 })
 export class TrainerComponent implements OnInit {
   trainer!: PokemonTrainer;

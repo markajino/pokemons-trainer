@@ -1,0 +1,24 @@
+h3{
+  margin-bottom: 0px;
+}
+
+div.pokemon-details {
+  text-align: left;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+}
+
+a{
+  color: #ff4081;
+}
+
+div.info{
+  height: auto;
+}
+
+div.info-group {
+ justify-content: space-around;
+ align-items: center;
+ display: flex;
+}
