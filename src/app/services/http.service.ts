@@ -9,7 +9,7 @@ import { Pokemon } from '../models/pokemon.model';
   providedIn: 'root',
 })
 export class HttpService {
-  baseApiURL = 'https://trainer-api-production.up.railway.app/trainers';
+  baseApiURL = 'https://json-server-assingment-api-production.up.railway.app';
 
   constructor(private http: HttpClient) {}
 
