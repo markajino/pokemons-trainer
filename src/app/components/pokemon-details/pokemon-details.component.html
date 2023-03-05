@@ -19,9 +19,9 @@
     </div>
     <div class="info" id="stats">
       <h3>Stats</h3>
-      <mat-list *ngFor="let stat of stats">
+      <mat-list *ngFor="let stat of stats;index as i">
         <span>
-          {{stat}}
+          {{stat}}: {{pokemonDetails.stats[i].base_stat}}
         </span>
       </mat-list>
     </div>
@@ -35,7 +35,7 @@
       </span>
     </mat-list>
 </div>
-<div class="info" class="abilities">
+<div class="info" id="abilities">
     <h3>Abilities</h3>
     <mat-list *ngFor="let ability of abilities">
       <span>
